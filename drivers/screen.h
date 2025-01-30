@@ -32,4 +32,6 @@ void printAt(char* str, int col, int row);
  */
 void print(char* str);
 
+void printBackspace();
+
 #endif
