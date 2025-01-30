@@ -1,9 +1,8 @@
-C_SOURCES = $(wildcard kernel/*.c drivers/*.c)
+C_SOURCES = $(wildcard kernel/*.c kernel/**/*.c drivers/*.c)
 HEADERS = $(wildcard kernel/*.h drivers/*.h)
 # Nice syntax for file extension replacement
 OBJ = ${C_SOURCES:.c=.o}
 
-CLEANING = 
 
 # -g: Use debugging symbols in gcc
 CFLAGS = -g
@@ -41,5 +40,5 @@ debug: os-image.bin kernel.elf
 	nasm $< -f bin -o $@
 
 clean:
-    del /Q /F *.bin *.dis *.o os-image.bin *.elf
-    del /Q /F kernel\*.o boot\*.bin drivers\*.o boot\*.o
+	del /Q /F *.bin *.dis *.o os-image.bin *.elf
+	del /Q /F kernel\*.o boot\*.bin drivers\*.o boot\*.o
