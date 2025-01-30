@@ -1,7 +1,7 @@
-C_SOURCES = $(wildcard kernel/*.c kernel/**/*.c drivers/*.c)
-HEADERS = $(wildcard kernel/*.h drivers/*.h)
+C_SOURCES = $(wildcard kernel/*.c kernel/**/*.c drivers/*.c cpu/*.c)
+HEADERS = $(wildcard kernel/*.h drivers/*.h cpu/*.h)
 # Nice syntax for file extension replacement
-OBJ = ${C_SOURCES:.c=.o}
+OBJ = ${C_SOURCES:.c=.o cpu/interrupt.o}
 
 
 # -g: Use debugging symbols in gcc
@@ -41,4 +41,4 @@ debug: os-image.bin kernel.elf
 
 clean:
 	del /Q /F *.bin *.dis *.o os-image.bin *.elf
-	del /Q /F kernel\*.o boot\*.bin drivers\*.o boot\*.o
+	del /Q /F kernel\*.o boot\*.bin drivers\*.o boot\*.o cpu\*.o
