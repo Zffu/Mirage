@@ -1,4 +1,5 @@
 #include <kernel/delegations/delegations.h>
+#include <kernel/loader/logger.h>
 
 #include <drivers/screen.h>
 #include <drivers/keyboard.h>
@@ -22,44 +23,28 @@ void showInputReady() {
 void main() {
     clearScreen();
 
-    print("[INFO] Loading Mirage v1.0.0\n\n");
+    l_loginfo("Starting Kernel startup sequence");
 
     isr_install();
-    
-    print("[");
-    printWithColor("OK", GREEN_ON_BLACK);
-    print("] Loaded ISR & IDT\n");
+    l_logok("Loaded & Installed CPU ISR");
 
     asm volatile("sti");
     initCPUTimer(50);
 
     initKeyboard();
+    l_logok("Loaded Keyboard Interruption handler");
 
-    print("[");
-    printWithColor("OK", GREEN_ON_BLACK);
-    print("] Loaded Keyboard Interuption handler\n");
-
-    print("[INFO] Granting intial delegation powers\n");
-    
     currentDelegate = createDelegate("delegation", 0x00);
 
-    print("[");
-    printWithColor("OK", GREEN_ON_BLACK);
-    print("] Switched state to the following delegation: ");
-
-    printWithColor("@", LIGHT_MAGENTA_ON_BLACK);
-    printWithColor(currentDelegate->name, MAGENTA_ON_BLACK);
+    l_logok("Granted original delegation");
 
     print("\n");
-
     showInputReady();
 }
 
 void userInput(char* input) {
     if(strcmp(input, "exit") == 0) {
-        print("[");
-        printWithColor("WARN", YELLOW_ON_BLACK);
-        print("] Instant CPU Termination Requested!");
+        l_logwarn("Instant CPU Termination requested!");
         asm volatile("hlt");
         return;
     }
