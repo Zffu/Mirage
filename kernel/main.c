@@ -1,6 +1,8 @@
 #include "../drivers/screen.h"
 #include "../drivers/keyboard.h"
 
+#include "./delegations/delegations.h"
+
 #include "../cpu/isr.h"
 #include "../cpu/idt.h"
 #include "../cpu/timer.h"
@@ -25,12 +27,24 @@ void main() {
 
     print("[");
     printWithColor("OK", GREEN_ON_BLACK);
-    print("] Loaded Keyboard Interuption handler");
+    print("] Loaded Keyboard Interuption handler\n");
+
+    print("[INFO] Granting intial delegation powers\n");
+    
+    DELEGATE* delegate = createDelegate("delegation", 0x00);
+
+    DELEGATE* d = createDelegate("walter", 0x00);
+
+    print("[");
+    printWithColor("OK", GREEN_ON_BLACK);
+    print("] Delegated the following context:");
 }
 
 void userInput(char* input) {
     if(strcmp(input, "exit") == 0) {
-        print("Bye bye!");
+        print("[");
+        printWithColor("WARN", YELLOW_ON_BLACK);
+        print("] Instant CPU Termination Requested!");
         asm volatile("hlt");
     }
 

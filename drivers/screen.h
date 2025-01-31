@@ -5,8 +5,11 @@
 #define VIDEO_ADDRESS 0xb8000
 #define MAX_ROWS 25
 #define MAX_COLS 80
+
 #define WHITE_ON_BLACK 0x0f
 #define GREEN_ON_BLACK 0x02
+#define YELLOW_ON_BLACK 0x0E
+
 #define RED_ON_WHITE 0xf4
 
 // Screen IO Ports
