@@ -1,5 +1,6 @@
 #include <kernel/delegations/delegations.h>
 #include <kernel/loader/logger.h>
+#include <kernel/fs.h>
 
 #include <drivers/screen.h>
 #include <drivers/keyboard.h>
@@ -37,6 +38,8 @@ void main() {
     currentDelegate = createDelegate("delegation", 0x00);
 
     l_logok("Granted original delegation");
+
+    initFS();
 
     print("\n");
     showInputReady();
@@ -78,6 +81,15 @@ void userInput(char* input) {
 
             delegate = delegate->next;
         }
+    }
+    else if(strcmp(input, "fsl") == 0) {
+        listFiles();
+    }
+    else if (strcmp(input, "write") == 0) {
+        char* filename = strnextsegment(input);
+        char* data = strnextsegment(filename);
+        writeFile(filename, data, strlen(data));
+        print("File written successfully\n");
     }
 
     showInputReady();
