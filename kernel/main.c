@@ -1,7 +1,7 @@
 #include "../drivers/screen.h"
 #include "../drivers/keyboard.h"
 
-#include "./delegations/delegations.h"
+#include <kernel/delegations/delegations.h>
 
 #include "../cpu/isr.h"
 #include "../cpu/idt.h"
