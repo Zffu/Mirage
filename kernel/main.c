@@ -10,21 +10,26 @@
 void main() {
     clearScreen();
 
-    print("Loading Mirage v1.0.0");
+    print("[INFO] Loading Mirage v1.0.0\n\n");
 
     isr_install();
     
+    print("[");
+    printWithColor("OK", GREEN_ON_BLACK);
+    print("] Loaded ISR & IDT\n");
+
     asm volatile("sti");
     initCPUTimer(50);
 
-    clearScreen();
-    print("Mirage v1.0.0 by Zffu\n>  ");
-
     initKeyboard();
+
+    print("[");
+    printWithColor("OK", GREEN_ON_BLACK);
+    print("] Loaded Keyboard Interuption handler");
 }
 
 void userInput(char* input) {
-    if(strcmp(input, "EXIT") == 0) {
+    if(strcmp(input, "exit") == 0) {
         print("Bye bye!");
         asm volatile("hlt");
     }

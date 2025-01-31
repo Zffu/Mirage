@@ -6,6 +6,7 @@
 #define MAX_ROWS 25
 #define MAX_COLS 80
 #define WHITE_ON_BLACK 0x0f
+#define GREEN_ON_BLACK 0x02
 #define RED_ON_WHITE 0xf4
 
 // Screen IO Ports
@@ -31,6 +32,9 @@ void printAt(char* str, int col, int row);
  * Prints a string.
  */
 void print(char* str);
+
+void printAtWithColor(char* str, int col, int row, int color);
+void printWithColor(char* str, int color);
 
 void printBackspace();
 
