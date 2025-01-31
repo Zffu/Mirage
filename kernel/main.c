@@ -7,8 +7,7 @@
 #include <cpu/idt.h>
 #include <cpu/timer.h>
 
-#include "../lib/str.h"
-#include "./utils/str.h"
+#include <libc/str.h>
 
 DELEGATE* currentDelegate;
 

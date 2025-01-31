@@ -4,7 +4,7 @@
 #include <drivers/ports.h>
 #include <drivers/screen.h>
 
-#include "../kernel/utils/str.h"
+#include <libc/str.h>
 
 isr_t interrupt_handlers[256];
 

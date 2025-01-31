@@ -1,12 +1,11 @@
 
 #include <kernel/delegations/delegations.h>
+#include <kernel/internal/mem.h>
 
 #include <cpu/types.h>
-
 #include <drivers/screen.h>
 
-#include "../../lib/mem.h"
-#include "../utils/str.h"
+#include <libc/str.h>
 
 int kernelDelegationCount = 0;
 DELEGATION_ENTRY* kernelDelegationRoot = 0;
@@ -24,7 +23,7 @@ DELEGATE* createDelegate(char* name, unsigned char level) {
     }
 
     u32 physical;
-    DELEGATION_ENTRY* delegate = malloc(sizeof(DELEGATION_ENTRY), 1, &physical);
+    DELEGATION_ENTRY* delegate = k_malloc(sizeof(DELEGATION_ENTRY), 1, &physical);
 
     delegate->name = name;
     delegate->level = level;

@@ -4,7 +4,7 @@
 #include <drivers/screen.h>
 #include <drivers/ports.h>
 
-#include "../kernel/utils/str.h"
+#include <libc/str.h>
 
 u32 tick = 0;
 
