@@ -1,7 +1,8 @@
-#include "keyboard.h"
-#include "ports.h"
-#include "../cpu/isr.h"
-#include "screen.h"
+#include <drivers/keyboard.h>
+#include <drivers/ports.h>
+#include <drivers/screen.h>
+
+#include <cpu/isr.h>
 
 #define BACKSPACE 0x0E
 #define ENTER 0x1C

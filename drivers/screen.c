@@ -1,5 +1,6 @@
-#include "screen.h"
-#include "ports.h"
+#include <drivers/screen.h>
+#include <drivers/ports.h>
+
 #include "../kernel/utils/mem.h"
 
 /* Declaration of private functions */
