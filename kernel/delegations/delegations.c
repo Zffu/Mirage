@@ -1,8 +1,9 @@
-#include "./delegations.h"
 
-#include "../../cpu/types.h"
+#include <kernel/delegations/delegations.h>
 
-#include "../../drivers/screen.h"
+#include <cpu/types.h>
+
+#include <drivers/screen.h>
 
 #include "../../lib/mem.h"
 #include "../utils/str.h"
