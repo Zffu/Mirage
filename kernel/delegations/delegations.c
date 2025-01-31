@@ -14,7 +14,7 @@ DELEGATION_ENTRY* kernelDelegationCurr = 0;
 DELEGATE* createDelegate(char* name, unsigned char level) {
     if(level == 0x00 && kernelDelegationCount > 0) {
         print("[");
-        printWithColor("ERROR", RED_ON_WHITE);
+        printWithColor("ERROR", LIGHT_RED_ON_BLACK);
         print("] Delegate ");
         print(name);
         print(" attempted to inherit absolute permissions\n");
@@ -43,3 +43,10 @@ DELEGATE* createDelegate(char* name, unsigned char level) {
     return (DELEGATE*)delegate;
 }
 
+DELEGATE* getMainDelegate() {
+    return kernelDelegationRoot;
+}
+
+int getDelegateCount() {
+    return kernelDelegationCount;
+}

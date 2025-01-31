@@ -19,6 +19,7 @@ typedef struct DELEGATION_ENTRY {
 
 DELEGATE* createDelegate(char* name, unsigned char level);
 
-DELEGATE** getAllDelegates();
+DELEGATE* getMainDelegate();
+int getDelegateCount();
 
 #endif

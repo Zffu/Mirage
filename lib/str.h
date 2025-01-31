@@ -9,4 +9,8 @@ void append(char* s, char n);
 
 void backspace(char* s);
 
+void strsplit(char* s, char sep);
+
+char* strnextsegment(char* s);
+
 #endif

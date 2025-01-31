@@ -22,3 +22,35 @@ void append(char* s, char n) {
     s[len] = n;
     s[len+1] = '\0';
 }
+
+void strsplit(char* s, char sep) {
+    int i = 0;
+    char c = s[0];
+
+    while(c != 0) {
+        c = s[i];
+
+        if(c == sep) {
+            s[i] = '\0';
+        }
+
+        ++i;
+    }
+}
+
+char* strnextsegment(char* s) {
+    int i = 0;
+    char c = s[0];
+
+    while(c != 0) {
+        c = s[i];
+
+        if(c == '\0') {
+            return s + i + 1;
+        }
+
+        ++i;
+    }
+
+    return s;
+}

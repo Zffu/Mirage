@@ -1,11 +1,12 @@
 C_SOURCES = $(wildcard kernel/*.c kernel/**/*.c drivers/*.c cpu/*.c lib/*.c)
-HEADERS = $(wildcard kernel/*.h drivers/*.h cpu/*.h)
+HEADERS = $(wildcard include/*.h include/*/*.h)
+
 # Nice syntax for file extension replacement
 OBJ = ${C_SOURCES:.c=.o cpu/interrupt.o}
 
 
 # -g: Use debugging symbols in gcc
-CFLAGS = -g
+CFLAGS = -g -Iinclude
 
 # First rule is run by default
 os-image.bin: boot/sector.bin kernel.bin
@@ -41,4 +42,4 @@ debug: os-image.bin kernel.elf
 
 clean:
 	del /Q /F *.bin *.dis *.o os-image.bin *.elf
-	del /Q /F kernel\*.o boot\*.bin drivers\*.o boot\*.o cpu\*.o
+	del /Q /F kernel\*.o boot\*.bin drivers\*.o boot\*.o cpu\*.o lib\*.o 
