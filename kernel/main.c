@@ -27,13 +27,7 @@ void main() {
     l_loginfo("Starting Kernel startup sequence");
 
     isr_install();
-    l_logok("Loaded & Installed CPU ISR");
-
-    asm volatile("sti");
-    initCPUTimer(50);
-
-    initKeyboard();
-    l_logok("Loaded Keyboard Interruption handler");
+    l_logok("Loaded CPU ISR");
 
     currentDelegate = createDelegate("delegation", 0x00);
 
