@@ -7,6 +7,9 @@
 #ifndef KERNEL_INTERNAL_MEM
 #define KERNEL_INTERNAL_MEM
 
+#define KERNEL_MEMORY_SPACE_START 0x10000
+#define KERNEL_MEMORY_SPACE_END 0x100000
+
 /**
  * Internally allocates a set amount of bytes and returns the address.
  * This function is seperated from malloc to provide a direct allocation access to the kernel.

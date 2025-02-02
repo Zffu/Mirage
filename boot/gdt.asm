@@ -12,6 +12,8 @@ gdt_code:
     db 10011010b ; flags (8 bits)
     db 11001111b ; flags (4 bits) + segment length, bits 16-19
     db 0x0       ; segment base, bits 24-31
+    db 10011010b ; flags: Present=1, Ring=00, Code=1, Readable=1, Only allows ring 0 to read kernel code
+
 
 ; GDT for data segment. base and length identical to code segment
 ; some flags changed, again, refer to os-dev.pdf
@@ -22,6 +24,7 @@ gdt_data:
     db 10010010b
     db 11001111b
     db 0x0
+    db 10010010b ; flags: Present=1, Ring=00, Data=1, Writable=1, Only allows ring 0 to modify kernel memory
 
 gdt_end:
 
