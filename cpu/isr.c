@@ -165,10 +165,10 @@ void irq_install() {
     initCPUTimer(50);
     l_logok("Enabled CPU timer interruption");
 
-    register_interrupt_handler(14, page_fault_handler);
-    l_logok("Registered kernel memory protector");
-
     /* IRQ1: keyboard */
     initKeyboard();
     l_logok("Enabled keyboard interruption handler");
+
+    register_interrupt_handler(14, page_fault_handler);
+    l_logok("Registered kernel memory protector");
 }

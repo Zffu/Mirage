@@ -29,11 +29,15 @@ void main() {
     isr_install();
     l_logok("Loaded CPU ISR");
 
+    irq_install();
+    l_logok("Loaded CPU IRQ");
+
     currentDelegate = createDelegate("delegation", 0x00);
 
     l_logok("Granted original delegation");
 
-    initFS();
+    l_logerr("Due to looping errors, the file system couldn't be loaded!");
+    //initFS();
 
     print("\n");
     showInputReady();
