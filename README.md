@@ -3,6 +3,8 @@ Mirage is an operating system.
 
 ## Building
 
+You will need [elf tools](https://github.com/lordmilko/i686-elf-tools/releases)
+
 You can build the Mirage kernel & Image by doing:
 ```
 make all # Builds all of the Operating System
