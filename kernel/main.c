@@ -2,6 +2,9 @@
 #include <kernel/loader/logger.h>
 #include <kernel/fs.h>
 
+#include <drivers/vga/graphics.h>
+#include <drivers/vga/vga.h>
+
 #include <drivers/screen.h>
 #include <drivers/keyboard.h>
 
@@ -22,26 +25,10 @@ void showInputReady() {
 }
 
 void main() {
-    clearScreen();
+    swapToGraphicsMode();
 
-    l_loginfo("Starting Kernel startup sequence");
-
-    isr_install();
-    l_logok("Loaded CPU ISR");
-
-    irq_install();
-    l_logok("Loaded CPU IRQ");
-
-    currentDelegate = createDelegate("delegation", 0x00);
-
-    l_logok("Granted original delegation");
-
-    l_logerr("Due to looping errors, the file system couldn't be loaded!");
-    //initFS();
-
-    print("\n");
-    showInputReady();
-}
+    drawRect(10,10,100,50,1);
+}  
 
 void userInput(char* input) {
     if(strcmp(input, "exit") == 0) {
