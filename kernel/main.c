@@ -8,9 +8,7 @@
 #include <cpu/isr.h>
 #include <cpu/idt.h>
 #include <cpu/timer.h>
-#include <cpu/pic.h>
 
-#include <libc/mem.h>
 #include <libc/str.h>
 
 DELEGATE* currentDelegate;
@@ -29,34 +27,16 @@ void main() {
     l_loginfo("Starting Kernel startup sequence");
 
     isr_install();
-    l_logok("Loaded & Installed CPU ISR");
+    l_logok("Loaded CPU ISR");
 
-    init_pic();
-
-    asm volatile("sti");
-    initCPUTimer(50);
-
-    // Wait for keyboard controller
-    while((readByteFromPort(0x64) & 0x2) != 0) {
-        // Buffer full, wait
-    }
-    
-    // Reset keyboard controller
-    writeByteInPort(0x64, 0xAE);  // Enable first PS/2 port
-    writeByteInPort(0x64, 0xAA);  // Test keyboard controller
-    
-    unsigned char test_response = readByteFromPort(0x60);
-    if(test_response != 0x55) {
-        l_logerr("Keyboard controller self-test failed");
-    }
-
-    initKeyboard();
-    l_logok("Loaded Keyboard Interruption handler");
+    irq_install();
+    l_logok("Loaded CPU IRQ");
 
     currentDelegate = createDelegate("delegation", 0x00);
 
     l_logok("Granted original delegation");
 
+    l_logerr("Due to looping errors, the file system couldn't be loaded!");
     //initFS();
 
     print("\n");

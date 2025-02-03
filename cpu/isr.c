@@ -4,6 +4,9 @@
 #include <drivers/ports.h>
 #include <drivers/screen.h>
 
+#include <kernel/loader/logger.h>
+#include <kernel/internal/mem.h>
+
 #include <libc/str.h>
 
 isr_t interrupt_handlers[256];
@@ -143,11 +146,29 @@ void irq_handler(registers_t r) {
     }
 }
 
+void page_fault_handler(registers_t r) {
+    u32 faulting_address;
+    asm volatile("mov %%cr2, %0" : "=r" (faulting_address));
+    
+    if (isKernelAllocatedMemory(faulting_address)) {
+        l_logerr("Attempted to access protected kernel memory! Aborting");
+        asm volatile("hlt");
+    }
+}
+
 void irq_install() {
     /* Enable interruptions */
     asm volatile("sti");
+    l_logok("Enabled CPU interruptions");
+
     /* IRQ0: timer */
     initCPUTimer(50);
+    l_logok("Enabled CPU timer interruption");
+
     /* IRQ1: keyboard */
     initKeyboard();
+    l_logok("Enabled keyboard interruption handler");
+
+    register_interrupt_handler(14, page_fault_handler);
+    l_logok("Registered kernel memory protector");
 }

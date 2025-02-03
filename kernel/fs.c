@@ -4,6 +4,7 @@
 #include <kernel/internal/mem.h>
 #include <kernel/loader/logger.h>
 
+#include <libc/str.h>
 #include <libc/mem.h>
 
 KERNEL_FS_ENTRY* kernelFileTable;
@@ -18,10 +19,15 @@ void initFS() {
     
     l_logok("Loaded ATA driver");
 
-    kernelFileTable = k_malloc(sizeof(KERNEL_FS_ENTRY) * KERNEL_FS_MAX_FILES, 1, 0);
+    kernelFileTable = k_malloc(sizeof(KERNEL_FS_ENTRY) * KERNEL_FS_MAX_FILES, 1, 0,0);
+
+    l_loginfo("Went beyond meloloc");
 
     u8 buff[512];
     ata_read_sector(KERNEL_FS_START_SECTOR, buff);
+
+    l_loginfo("Beyond sector read");
+
     memcpy(buff, (char*)kernelFileTable, sizeof(kernelFileTable));
 
     l_logok("Retrieved file table!");

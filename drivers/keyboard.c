@@ -2,8 +2,6 @@
 #include <drivers/ports.h>
 #include <drivers/screen.h>
 
-#include <kernel/loader/logger.h>
-
 #include <cpu/isr.h>
 
 #define BACKSPACE 0x0E
@@ -47,9 +45,5 @@ static void keyboard_callback(registers_t regs) {
 }
 
 void initKeyboard() {
-    
-
-    register_interrupt_handler(IRQ1, keyboard_callback); 
-
-    l_logok("Registered keyboard interrupt handler");
+   register_interrupt_handler(IRQ1, keyboard_callback); 
 }
