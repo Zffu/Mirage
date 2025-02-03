@@ -27,17 +27,19 @@ void main() {
     l_loginfo("Starting Kernel startup sequence");
 
     isr_install();
-    l_logok("Loaded CPU ISR");
+    l_logok("Loaded & Installed CPU ISR");
 
-    irq_install();
-    l_logok("Loaded CPU IRQ");
+    asm volatile("sti");
+    initCPUTimer(50);
+
+    initKeyboard();
+    l_logok("Loaded Keyboard Interruption handler");
 
     currentDelegate = createDelegate("delegation", 0x00);
 
     l_logok("Granted original delegation");
 
-    l_logerr("Due to looping errors, the file system couldn't be loaded!");
-    //initFS();
+    initFS();
 
     print("\n");
     showInputReady();

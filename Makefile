@@ -4,19 +4,13 @@ HEADERS = $(wildcard include/*.h include/*/*.h)
 # Nice syntax for file extension replacement
 OBJ = ${C_SOURCES:.c=.o cpu/interrupt.o}
 
+
 # -g: Use debugging symbols in gcc
 CFLAGS = -g -Iinclude
-
-all: os-image.bin
-image: os-image.bin
-
-kernel: kernel.bin
-bootloader: boot/sector.bin
 
 # First rule is run by default
 os-image.bin: boot/sector.bin kernel.bin
 	copy /b boot\sector.bin + kernel.bin os-image.bin
-
 
 # '--oformat binary' deletes all symbols as a collateral, so we don't need
 # to 'strip' them manually on this case

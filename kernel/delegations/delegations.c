@@ -23,7 +23,7 @@ DELEGATE* createDelegate(char* name, unsigned char level) {
     }
 
     u32 physical;
-    DELEGATION_ENTRY* delegate = k_malloc(sizeof(DELEGATION_ENTRY), 1, &physical,0);
+    DELEGATION_ENTRY* delegate = k_malloc(sizeof(DELEGATION_ENTRY), 1, &physical);
 
     delegate->name = name;
     delegate->level = level;

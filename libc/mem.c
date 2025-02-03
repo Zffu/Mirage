@@ -8,7 +8,7 @@ u32 malloc(u32 size) {
     if(size < 1) return -1;
 
     u32 paddr;
-    return k_malloc(size, 1, paddr, 3);
+    return k_malloc(size, 1, paddr);
 }
 
 /**
