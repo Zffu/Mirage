@@ -1,5 +1,5 @@
 # Mirage
-Mirage is an operating system. I was really bored
+Mirage is an WIP kernel. I was really bored
 
 ## Building
 
