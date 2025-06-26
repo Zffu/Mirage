@@ -1,5 +1,5 @@
 # Mirage
-Mirage is an operating system.
+Mirage is an operating system. I was really bored
 
 ## Building
 
